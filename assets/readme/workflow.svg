@@ -1,6 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 370" width="960" height="370" role="img">
 <title>HiddenShield workflow</title><desc>Schedule a task, cache reusable context, and verify candidate findings.</desc>
 <rect width="960" height="370" rx="20" fill="#09131b"/>
+<defs>
+  <radialGradient id="particle-light"><stop stop-color="#87ffe0" stop-opacity=".85"/><stop offset=".25" stop-color="#55e2ce" stop-opacity=".48"/><stop offset="1" stop-color="#31c8d5" stop-opacity="0"/></radialGradient>
+  <radialGradient id="particle-field"><stop stop-color="#145759" stop-opacity=".58"/><stop offset="1" stop-color="#09131b" stop-opacity="0"/></radialGradient>
+  <clipPath id="particle-clip"><rect width="960" height="370" rx="20"/></clipPath>
+</defs>
+<ellipse cx="751" cy="145" rx="270" ry="143" fill="url(#particle-field)"/>
+<g clip-path="url(#particle-clip)">
+<!-- particles:start -->
+<circle cx="712" cy="125" r="13" fill="url(#particle-light)"/><circle cx="797" cy="158" r="18" fill="url(#particle-light)"/><circle cx="871" cy="95" r="10" fill="url(#particle-light)"/>
+<!-- particles:end -->
+</g>
 <path d="M32 60H928 M32 322H928" stroke="#2b4352"/>
 <g font-family="Menlo, monospace" fill="#75e6c4" font-size="20"><text x="42" y="40">HIDDENSHIELD / WORKFLOW</text><text x="42" y="351">AUTHORIZED SECURITY TESTING</text></g>
 <text x="40" y="136" fill="#f4faf9" font-family="Helvetica, sans-serif" font-size="69" font-weight="700">HiddenShield</text>
