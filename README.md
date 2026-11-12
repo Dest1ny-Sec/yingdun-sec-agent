@@ -1,20 +1,12 @@
-<img src="assets/readme-cover.gif" width="960" alt="隐盾 HiddenShield：任务调度、智能缓存、决策验证" />
+<img src="assets/readme/workflow.gif" width="960" alt="隐盾 HiddenShield：任务调度、智能缓存、决策验证" />
 
 # 隐盾 · HiddenShield
 
 面向授权安全测试的工作台。登记目标后，可在同一个界面跟踪任务进度、查看工具证据和攻击链路，并导出 Markdown 报告。
 
-[快速开始](#快速开始) · [界面预览](#界面预览) · [工作流程](#工作流程) · [配置](#配置)
+[快速开始](#快速开始) · [界面预览](#界面预览) · [工作流程](#工作流程) · [架构](#架构) · [配置](#配置) · [版本记录](CHANGELOG.md) · [静态封面](assets/readme/workflow.svg)
 
 > 仅用于获得明确授权的测试、教学和安全研究。
-
-## 工作流程
-
-| 环节 | 平台提供的能力 |
-| --- | --- |
-| 任务调度 | 根据目标和范围拆分任务，由多个 Worker 并行执行，使用共享黑板记录事实和待验证事项。 |
-| 智能缓存 | 记录可复用的结构化结果；具体命中情况取决于任务和模型配置。 |
-| 决策验证 | 对候选发现执行复核，保存验证结果和证据，供人工判断与报告导出。 |
 
 ## 界面预览
 
@@ -43,7 +35,22 @@
 
 </details>
 
+## 工作流程
+
+| 环节 | 平台提供的能力 |
+| --- | --- |
+| 任务调度 | 根据目标和范围拆分任务，由多个 Worker 并行执行，使用共享黑板记录事实和待验证事项。 |
+| 智能缓存 | 记录可复用的结构化结果；具体命中情况取决于任务和模型配置。 |
+| 决策验证 | 对候选发现执行复核，保存验证结果和证据，供人工判断与报告导出。 |
+
 ## 快速开始
+
+| 平台 | 启动脚本 |
+| --- | --- |
+| macOS / Linux | [start-dhunter.sh](scripts/start-dhunter.sh) |
+| Windows | [start-dhunter.ps1](scripts/start-dhunter.ps1) |
+
+首次启动后访问 [本地工作台](http://127.0.0.1:13343/)，凭据见终端启动信息。完成登录后，可在系统设置中配置模型。
 
 ### 环境要求
 
@@ -56,15 +63,19 @@
 
 ### 一键启动（推荐）
 
-```bash
-# 先装外部扫描器（可选，缺失会自动跳过）
-./scripts/setup-tools.sh                                   # macOS / Linux
-powershell -ExecutionPolicy Bypass -File scripts\setup-tools.ps1   # Windows
+**macOS / Linux**
 
-# 启动三件套
-./scripts/start-dhunter.sh start                           # macOS / Linux
-powershell -ExecutionPolicy Bypass -File scripts\start-dhunter.ps1 start   # Windows
+```bash
+./scripts/start-dhunter.sh start
 ```
+
+**Windows PowerShell**
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/start-dhunter.ps1 start
+```
+
+外部扫描器可按需安装，参见[外部工具依赖](#外部工具依赖可选)。
 
 启动后打开 <http://127.0.0.1:13343/>。
 
@@ -165,19 +176,12 @@ llm:
 
 ## 架构
 
-```
-┌────────────────┐     ┌────────────────┐     ┌─────────────────┐
-│  Vue 3 Web UI  │ ←─→ │ Go HTTP + SSE  │ ←─→ │ Python Agent    │
-│  (Vite build)  │     │  (Gin)         │     │ (黑板 + worker) │
-└────────────────┘     └────────────────┘     └────────┬────────┘
-                              │                        │
-                              ↓                        ↓
-                       ┌────────────┐         ┌──────────────┐
-                       │  SQLite    │         │  MCP 工具集  │
-                       │ targets /  │         │  侦察 / 指纹  │
-                       │ runs /     │         │  主动测试     │
-                       │ vulns /    │         │  报告         │
-                       └────────────┘         └──────────────┘
+```mermaid
+flowchart LR
+    UI["Vue 工作台"] <-->|"HTTP / SSE"| API["Go 服务"]
+    API <-->|"任务与事件"| Agent["Python 调度"]
+    API --- DB[("SQLite")]
+    Agent <-->|"工具调用"| MCP["MCP 工具"]
 ```
 
 **运行流程**：`origin/goal 事实` 种入黑板 → planner（reason）提出攻击意图 → 多 worker 并行探索并回写事实 → 收敛 → verifier 对每条漏洞做机械重放验收 → 生成报告。worker 之间不直接通信，全靠黑板协调（stigmergy）。

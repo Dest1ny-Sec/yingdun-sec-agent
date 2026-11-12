@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 370" width="960" height="370" role="img">
+<title>HiddenShield workflow</title><desc>Schedule a task, cache reusable context, and verify candidate findings.</desc>
+<rect width="960" height="370" rx="20" fill="#09131b"/>
+<path d="M32 60H928 M32 322H928" stroke="#2b4352"/>
+<g font-family="Menlo, monospace" fill="#75e6c4" font-size="20"><text x="42" y="40">HIDDENSHIELD / WORKFLOW</text><text x="42" y="351">AUTHORIZED SECURITY TESTING</text></g>
+<text x="40" y="136" fill="#f4faf9" font-family="Helvetica, sans-serif" font-size="69" font-weight="700">HiddenShield</text>
+<text x="42" y="181" fill="#b8d2dc" font-family="Helvetica, sans-serif" font-size="28">From task to evidence</text>
+<path d="M310 259H347 M613 259H650" stroke="#668d9e" stroke-width="4"/>
+<!-- motion-beacon -->
+<g font-family="Menlo, monospace" font-size="27" font-weight="700">
+<rect id="stage0" x="42" y="218" width="268" height="82" rx="12" fill="#123c38" stroke="#68f4cf" stroke-width="3"/>
+<rect id="stage1" x="346" y="218" width="268" height="82" rx="12" fill="#142632" stroke="#3b5869" stroke-width="2"/>
+<rect id="stage2" x="650" y="218" width="268" height="82" rx="12" fill="#142632" stroke="#3b5869" stroke-width="2"/>
+<g fill="#e9f8f5"><text x="66" y="269">01 SCHEDULE</text><text x="370" y="269">02 CACHE</text><text x="674" y="269">03 VERIFY</text></g>
+</g>
+</svg>
