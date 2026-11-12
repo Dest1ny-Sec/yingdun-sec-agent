@@ -6,6 +6,8 @@
 
 [快速开始](#快速开始) · [界面预览](#界面预览) · [工作流程](#工作流程) · [架构](#架构) · [配置](#配置) · [版本记录](CHANGELOG.md) · [静态封面](assets/readme/workflow.svg)
 
+<img src="assets/readme/stack.svg" width="960" alt="技术栈：Vue 3 前端、Go / Gin 服务、Python Agent、SQLite 存储" />
+
 > 仅用于获得明确授权的测试、教学和安全研究。
 
 ## 界面预览
@@ -14,8 +16,15 @@
 
 <img src="assets/screenshots/dashboard.png" width="960" alt="调度总览：任务状态、模型配置提示和漏洞统计" />
 
+| 界面 | 可以查看什么 |
+| --- | --- |
+| [登录](assets/screenshots/readme-login.png) | 工作台登录入口 |
+| [授权目标](assets/screenshots/targets.png) | 目标管理与评估入口 |
+| [运行记录](assets/screenshots/readme-runs.png) | 历史任务状态与用量 |
+| [系统设置](assets/screenshots/settings.png) | 模型、账号与运行预算 |
+
 <details>
-<summary>查看更多界面</summary>
+<summary>展开完整截图</summary>
 
 ### 登录
 
