@@ -17,7 +17,7 @@ Get-ChildItem $ToolBin -Filter *.exe -ErrorAction SilentlyContinue | ForEach-Obj
 }
 
 # 1. Go 扫描器 (go install → tools\bin)
-Write-Host "`n→ [1/4] Go 扫描器 (go install)"
+Write-Host "`n→ [1/3] Go 扫描器 (go install)"
 $env:GOBIN = $ToolBin
 $packages = @(
   "github.com/projectdiscovery/httpx/cmd/httpx@latest",
@@ -38,7 +38,7 @@ foreach ($pkg in $packages) {
 }
 
 # 2. nmap
-Write-Host "`n→ [2/4] nmap (端口扫描)"
+Write-Host "`n→ [2/3] nmap (端口扫描)"
 if (Get-Command nmap -ErrorAction SilentlyContinue) {
   Write-Host "   ✓ nmap 已在 PATH" -ForegroundColor Green
 } else {
@@ -46,15 +46,6 @@ if (Get-Command nmap -ErrorAction SilentlyContinue) {
   Write-Host "     (可选工具，缺失时平台自动跳过)"
 }
 
-# 3. Python 工具 (可选)
-Write-Host "`n→ [3/4] Python 工具 (arjun/uro, 可选)"
-try {
-  python -m pip install -q arjun uro
-  Write-Host "   ✓ arjun + uro" -ForegroundColor Green
-} catch {
-  Write-Host "   ⚠️ pip 安装跳过（可选工具）"
-}
-
-# 4. 提示
-Write-Host "`n→ [4/4] 完成" -ForegroundColor Green
+# 3. 提示
+Write-Host "`n→ [3/3] 完成" -ForegroundColor Green
 Write-Host "启动脚本会自动把 tools\bin 加入 PATH。缺失的扫描器平台会自动跳过/改用替代方案。"

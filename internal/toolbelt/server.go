@@ -261,7 +261,10 @@ func Serve(addr, token string) error {
 	// lets the UI tell the user "subfinder 已安装 / nmap 缺失(将自动跳过)"
 	// instead of failing silently on a clean machine.
 	mux.HandleFunc("/availability", func(w http.ResponseWriter, _ *http.Request) {
-		deps := []string{"subfinder", "assetfinder", "katana", "gau", "waybackurls", "httpx", "nmap", "arjun", "uro"}
+		// Only list binaries the toolbelt actually shells out to; arjun/uro
+		// are referenced in docs but never invoked, so they must not appear
+		// here (they would report "installed" with no callable tool behind it).
+		deps := []string{"subfinder", "assetfinder", "katana", "gau", "waybackurls", "httpx", "nmap"}
 		out := make(map[string]bool, len(deps))
 		for _, d := range deps {
 			_, err := exec.LookPath(d)

@@ -167,7 +167,6 @@ powershell -ExecutionPolicy Bypass -File scripts\setup-tools.ps1
 | `waybackurls` | Wayback URL | `go install github.com/tomnomnom/waybackurls@latest` | 同左 |
 | `assetfinder` | 子域发现 | `go install github.com/tomnomnom/assetfinder@latest` | 同左 |
 | `nmap` | 端口扫描 | `brew install nmap` | [官方安装包](https://nmap.org/download.html) |
-| `arjun` / `uro` | 参数 fuzz / URL 去重 | `pip3 install arjun uro` | `pip install arjun uro` |
 
 > 缺少某个扫描器不会报错——agent 会收到"[工具 xxx 未安装] 已跳过，可改用替代方法"的提示并自动换工具。
 

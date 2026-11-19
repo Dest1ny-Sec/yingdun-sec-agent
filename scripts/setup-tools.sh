@@ -14,7 +14,7 @@ echo "════════════════════════�
 
 # 1. 基础网络扫描器 (Homebrew)
 echo ""
-echo "→ [1/3] 基础工具 (nmap)"
+echo "→ [1/2] 基础工具 (nmap)"
 if command -v brew >/dev/null 2>&1; then
   brew list nmap >/dev/null 2>&1 || brew install nmap
   echo "   ✓ nmap"
@@ -24,7 +24,7 @@ fi
 
 # 2. Go 扫描器 (go install → tools/bin)
 echo ""
-echo "→ [2/3] Go 扫描器 (go install)"
+echo "→ [2/2] Go 扫描器 (go install)"
 for pkg in \
   "github.com/projectdiscovery/httpx/cmd/httpx@latest" \
   "github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest" \
@@ -40,15 +40,6 @@ for pkg in \
   echo "   → 安装 $name ..."
   GOBIN="$TOOLBIN" go install "$pkg"
 done
-
-# 3. Python 工具 (可选)
-echo ""
-echo "→ [3/3] Python 工具 (arjun/uro, 可选)"
-if python3 -c "import arjun" 2>/dev/null; then
-  echo "   ✓ arjun"
-else
-  pip3 install -q arjun uro 2>/dev/null && echo "   ✓ arjun + uro" || echo "   ⚠️ pip 安装跳过（可选工具，不影响核心功能）"
-fi
 
 echo ""
 echo "✅ 完成。启动脚本会自动把 tools/bin 加入 PATH。"
